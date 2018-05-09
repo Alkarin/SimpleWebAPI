@@ -21,13 +21,13 @@ import static com.sample.foo.simplewebapi.MainActivity.API_KEY;
 import static com.sample.foo.simplewebapi.MainActivity.API_URL;
 
 /**
- * Created by alexander on 1/19/18.
+ *  Created by alexander on 1/19/18.
  *
- * AsyncTask has 4 important methods:
- * onPreExecute()       -what to do before the expensive task begins
- * doInBackground()     -the actual expensive operation goes in here
- * onProgressUpdate()   -what to do to show progress
- * and onPostExecute()  -what to do when the task is complete
+ *  AsyncTask has 4 important methods:
+ *  onPreExecute()       - what to do before the expensive task begins
+ *  doInBackground()     - the actual expensive operation goes in here
+ *  onProgressUpdate()   - what to do to show progress
+ *  and onPostExecute()  - what to do when the task is complete
  */
 
 
@@ -52,7 +52,7 @@ public class RetrieveFeedTask extends AsyncTask<Void, Void, String> {
 
     protected String doInBackground(Void... urls) {
         String email = emailText.getText().toString();
-        // Do some validation here
+        // TODO: Do some validation on email here
 
         try {
             URL url = new URL(API_URL + "email=" + email + "&apiKey=" + API_KEY);
