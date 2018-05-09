@@ -77,6 +77,7 @@ public class RetrieveFeedTask extends AsyncTask<Void, Void, String> {
         }
     }
 
+
     protected void onPostExecute(String response) {
         if(response == null) {
             response = "THERE WAS AN ERROR";
@@ -89,31 +90,6 @@ public class RetrieveFeedTask extends AsyncTask<Void, Void, String> {
         Log.i("INFO", response);
 
         // do something with the feed
-        parseResponse(response);
-    }
-
-    private void parseResponse(String response){
-
-        if(response.equals("THERE WAS AN ERROR")){
-            // Do nothing
-            Log.i("INFO", "Exiting RetrieveFeedTask.parseResponse()");
-            return;
-        }
-
-        try {
-            JSONObject object = (JSONObject) new JSONTokener(response).nextValue();
-
-            // Parse values from JSON Object into specific variables
-            String requestID = object.getString("requestId");
-
-            int likelihood = object.getInt("likelihood");
-
-            JSONArray photos = object.getJSONArray("photos");
-
-            Log.d("Debug",String.valueOf(photos));
-
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
+        MainActivity.parseResponse(response);
     }
 }

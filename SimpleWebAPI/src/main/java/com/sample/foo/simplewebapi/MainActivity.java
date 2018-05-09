@@ -2,11 +2,17 @@ package com.sample.foo.simplewebapi;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+import org.json.JSONTokener;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -37,6 +43,29 @@ public class MainActivity extends AppCompatActivity {
                 new RetrieveFeedTask(responseView, emailText, progressBar).execute();
             }
         });
+    }
+
+    protected static void parseResponse(String response){
+
+        if(response.equals("THERE WAS AN ERROR")){
+            // Do nothing
+            Log.i("INFO", "Exiting RetrieveFeedTask.parseResponse()");
+            return;
+        }
+
+        try {
+            JSONObject object = (JSONObject) new JSONTokener(response).nextValue();
+
+            // Parse values from JSON Object into specific variables
+            String requestID = object.getString("requestId");
+            int likelihood = object.getInt("likelihood");
+            JSONArray photos = object.getJSONArray("photos");
+
+            //Log.d("Debug",String.valueOf(photos));
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
     }
 
 }
