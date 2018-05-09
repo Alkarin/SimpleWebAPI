@@ -12,11 +12,6 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-import org.json.JSONTokener;
-
 import static com.sample.foo.simplewebapi.MainActivity.API_KEY;
 import static com.sample.foo.simplewebapi.MainActivity.API_URL;
 
@@ -76,7 +71,6 @@ public class RetrieveFeedTask extends AsyncTask<Void, Void, String> {
             return null;
         }
     }
-
 
     protected void onPostExecute(String response) {
         if(response == null) {

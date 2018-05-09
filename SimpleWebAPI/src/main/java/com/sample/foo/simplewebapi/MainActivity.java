@@ -20,7 +20,7 @@ public class MainActivity extends AppCompatActivity {
     EditText emailText;
     TextView responseView;
     ProgressBar progressBar;
-    static final String API_KEY = constants.API_KEY;
+    static final String API_KEY = Constants.API_KEY;
     static final String API_URL = "https://api.fullcontact.com/v2/person.json?";
 
     @Override
