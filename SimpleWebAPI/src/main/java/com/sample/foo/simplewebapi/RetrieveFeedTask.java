@@ -12,11 +12,22 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+import org.json.JSONTokener;
+
 import static com.sample.foo.simplewebapi.MainActivity.API_KEY;
 import static com.sample.foo.simplewebapi.MainActivity.API_URL;
 
 /**
  * Created by alexander on 1/19/18.
+ *
+ * AsyncTask has 4 important methods:
+ * onPreExecute()       -what to do before the expensive task begins
+ * doInBackground()     -the actual expensive operation goes in here
+ * onProgressUpdate()   -what to do to show progress
+ * and onPostExecute()  -what to do when the task is complete
  */
 
 
@@ -72,21 +83,29 @@ public class RetrieveFeedTask extends AsyncTask<Void, Void, String> {
         }
         progressBar.setVisibility(View.GONE);
         Log.i("INFO", response);
-        responseView.setText(response);
-        // TODO: check this.exception
-        // TODO: do something with the feed
 
-//            try {
-//                JSONObject object = (JSONObject) new JSONTokener(response).nextValue();
-//                String requestID = object.getString("requestId");
-//                int likelihood = object.getInt("likelihood");
-//                JSONArray photos = object.getJSONArray("photos");
-//                .
-//                .
-//                .
-//                .
-//            } catch (JSONException e) {
-//                e.printStackTrace();
-//            }
+        // display response to textview
+        responseView.setText(response);
+
+        // do something with the feed
+        parseResponse(response);
+    }
+
+    private void parseResponse(String response){
+        try {
+            JSONObject object = (JSONObject) new JSONTokener(response).nextValue();
+
+            // Parse values from JSON Object into specific variables
+            String requestID = object.getString("requestId");
+
+            int likelihood = object.getInt("likelihood");
+
+            JSONArray photos = object.getJSONArray("photos");
+
+            Log.d("Debug",String.valueOf(photos));
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
     }
 }
