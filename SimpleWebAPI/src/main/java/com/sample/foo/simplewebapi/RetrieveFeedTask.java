@@ -81,17 +81,25 @@ public class RetrieveFeedTask extends AsyncTask<Void, Void, String> {
         if(response == null) {
             response = "THERE WAS AN ERROR";
         }
+
         progressBar.setVisibility(View.GONE);
-        Log.i("INFO", response);
 
         // display response to textview
         responseView.setText(response);
+        Log.i("INFO", response);
 
         // do something with the feed
         parseResponse(response);
     }
 
     private void parseResponse(String response){
+
+        if(response.equals("THERE WAS AN ERROR")){
+            // Do nothing
+            Log.i("INFO", "Exiting RetrieveFeedTask.parseResponse()");
+            return;
+        }
+
         try {
             JSONObject object = (JSONObject) new JSONTokener(response).nextValue();
 
