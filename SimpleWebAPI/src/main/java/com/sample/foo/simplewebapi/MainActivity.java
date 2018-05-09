@@ -34,14 +34,18 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        // Grab elements
         responseView = (TextView) findViewById(R.id.responseView);
         emailText = (EditText) findViewById(R.id.emailText);
         progressBar = (ProgressBar) findViewById(R.id.progressBar);
 
+        // Grab Button
         Button queryButton = (Button) findViewById(R.id.queryButton);
+        // Set query execution on button click
         queryButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                // Execute query
                 new RetrieveFeedTask(responseView, emailText, progressBar).execute();
             }
         });
